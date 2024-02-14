@@ -15,8 +15,8 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent implements OnInit, OnDestroy {
   // KeenThemes mock, change it to:
   defaultAuth: any = {
-    email: 'admin@demo.com',
-    password: 'demo',
+    email: 'admin@gmail.com',
+    password: '12345678',
   };
   loginForm: FormGroup;
   hasError: boolean;
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
-    private toastr: ToastrService,
+    private toastr: ToastrService
   ) {
     this.isLoading$ = this.authService.isLoading$;
     // redirect to home if already logged in
@@ -46,9 +46,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.returnUrl =
       this.route.snapshot.queryParams['returnUrl'.toString()] || '/';
 
-      // this.toastr.error("Validacion","El icono es obligatoria");
-      // this.toastr.success("Validacion","El icono es obligatoria");
-      // this.toastr.info("Validacion","El icono es obligatoria");
+    // this.toastr.error("Validacion","El icono es obligatoria");
+    // this.toastr.success("Validacion","El icono es obligatoria");
+    // this.toastr.info("Validacion","El icono es obligatoria");
   }
 
   // convenience getter for easy access to form fields
@@ -82,13 +82,17 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.hasError = false;
     const loginSubscr = this.authService
       .login(this.f.email.value, this.f.password.value)
-      .pipe(first())
-      .subscribe((user: UserModel | undefined) => {
+      // .pipe(first())
+      .subscribe((user: any) => {
         if (user) {
-          this.router.navigate([this.returnUrl]);
+          document.location.reload();
+          // this.router.navigate(["/dashboard"]);
+          // this.router.navigate([this.returnUrl]);
         } else {
           this.hasError = true;
         }
+        console.log(user);
+        
       });
     this.unsubscribe.push(loginSubscr);
   }
