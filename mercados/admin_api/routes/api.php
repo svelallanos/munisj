@@ -32,4 +32,9 @@ Route::group([
         "index", "show","store", "destroy"
     ]);
     Route::post('permiso/{id}', [PermisoController::class, 'update']);
+
+    Route::resource('role', RoleController::class)->only([
+        "index", "show","store", "destroy"
+    ]);
+    Route::post('role/{id}', [RoleController::class, 'update']);
 });
