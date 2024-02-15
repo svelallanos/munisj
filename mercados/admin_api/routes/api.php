@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\Admin\PermisoController;
+use App\Http\Controllers\Admin\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,11 @@ Route::group([
 ], function () {
     Route::controller(PermisoController::class);
     Route::resource('permiso', 'permiso');
+});
+
+Route::group([
+    'middleware' => 'api'
+], function () {
+    Route::controller(RoleController::class);
+    Route::resource('role', 'role');
 });
