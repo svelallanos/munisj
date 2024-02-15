@@ -14,10 +14,6 @@ const routes: Routes = [{
       component: RoleListComponent,
     },
     {
-      path: 'register',
-      component: RoleAddComponent
-    },
-    {
       path: 'edit',
       component: RoleEditComponent
     }
