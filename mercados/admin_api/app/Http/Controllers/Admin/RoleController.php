@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Role\RoleCollection;
+use App\Models\Role\Role;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -12,7 +14,11 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $role = Role::orderBy("id","desc")->get();
+
+        return response()->json([
+            "roles" => RoleCollection::make($role),
+        ]);
     }
 
     /**
