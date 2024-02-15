@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Http\Resources\Role\Permiso;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\ResourceCollection;
+
+class PermisoCollection extends ResourceCollection
+{
+    /**
+     * Transform the resource collection into an array.
+     *
+     * @return array<int|string, mixed>
+     */
+    public function toArray(Request $request): array
+    {
+        return [
+            "data" => PermisoResource::collection($this->collection),
+        ];
+    }
+}
