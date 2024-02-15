@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->boolean('state')->default(true);
+            $table->unsignedTinyInteger('state')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

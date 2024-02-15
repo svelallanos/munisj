@@ -1,3 +1,10 @@
+<span *ngIf="isLoading | async" class="indicator-progress">
+  Please wait...
+  <span
+    class="spinner-border spinner-border-sm align-middle ms-2"
+  ></span
+></span>
+
 <div class="card card-flush">
   <div class="card-header mt-6">
     <div class="card-title">
@@ -33,41 +40,48 @@
               class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0"
             >
               <th class="col">Name</th>
-              <th class="col">Name</th>
-              <th class="col">Name</th>
-              <th class="col">Name</th>
+              <th class="col">ASIGNED TO</th>
+              <th class="col">FECHA CREATE</th>
+              <th class="col">STATE</th>
+              <th class="col">ACTION</th>
             </tr>
           </thead>
           <tbody class="fw-bold text-gray-600">
-            <tr>
-              <td>User Management</td>
-              <td>
-                <a
-                  onclick="return false;"
-                  class="badge badge-light-primary fs-7 m-1"
-                  >Administrator</a
-                >
-              </td>
-              <td>20 Dec 2022, 11:30 am</td>
-              <td class="text-end">
-                <button
-                  class="btn btn-icon btn-active-light-primary w-30px h-30px me-3"
-                >
-                  <i class="ki-duotone ki-pencil fs-3"
-                    ><span class="path1"></span><span class="path2"></span
-                  ></i>
-                </button>
-                <button
-                  class="btn btn-icon btn-active-light-primary w-30px h-30px"
-                >
-                  <i class="ki-duotone ki-trash fs-3">
-                    <span class="path1"></span><span class="path2"></span>
-                    <span class="path3"></span><span class="path4"></span
-                    ><span class="path5"></span>
-                  </i>
-                </button>
-              </td>
-            </tr>
+            <ng-container *ngFor="let PERMISO of PERMISOS ">
+              <tr>
+                <td>{{PERMISO.name}}</td>
+                <td>
+                  <a
+                    onclick="return false;"
+                    class="badge badge-light-primary fs-7 m-1"
+                    >Administrator</a
+                  >
+                </td>
+                <td>20 Dec 2022, 11:30 am</td>
+                <td *ngIf="PERMISO.state == 1"><span class="badge badge-primary">Activo</span></td>
+                <td *ngIf="PERMISO.state == 2"><span class="badge badge-danger">Des-activo</span></td>
+                <td class="text-end">
+                  <button
+                    class="btn btn-icon btn-active-light-primary w-30px h-30px me-3"
+                    (click)="openModalEditPermiso(PERMISO)"
+                  >
+                    <i class="ki-duotone ki-pencil fs-3"
+                      ><span class="path1"></span><span class="path2"></span
+                    ></i>
+                  </button>
+                  <button
+                    class="btn btn-icon btn-active-light-primary w-30px h-30px"
+                    (click)="deletePermiso(PERMISO)"
+                  >
+                    <i class="ki-duotone ki-trash fs-3">
+                      <span class="path1"></span><span class="path2"></span>
+                      <span class="path3"></span><span class="path4"></span
+                      ><span class="path5"></span>
+                    </i>
+                  </button>
+                </td>
+              </tr>
+            </ng-container>
           </tbody>
         </table>
       </div>

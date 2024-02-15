@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Role\Permiso\PermisoCollection;
+use App\Http\Resources\Role\Permiso\PermisoResource;
 use App\Models\Role\Permiso;
 use Illuminate\Http\Request;
 
@@ -11,9 +13,15 @@ class PermisoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $search = $request->search;
+        $state = $request->state;
+
+        $permisos = Permiso::filterAdvance($search, $state)->orderBy("id","desc")->get();
+         return response()->json([
+            "permisos" => PermisoCollection::make($permisos)
+         ]);
     }
 
     /**
@@ -29,7 +37,11 @@ class PermisoController extends Controller
      */
     public function store(Request $request)
     {
-        $permiso = Permiso::create();
+        $permiso = Permiso::create($request->all());
+
+        return response()->json([
+            "permiso" => PermisoResource::make($permiso)
+        ]);
     }
 
     /**
@@ -53,7 +65,12 @@ class PermisoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $permiso = Permiso::findOrFail($id);
+        $permiso->update($request->all());
+
+        return response()->json([
+            "permiso" => PermisoResource::make($permiso)
+        ]);
     }
 
     /**
@@ -61,6 +78,11 @@ class PermisoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $permiso = Permiso::findOrFail($id);
+        $permiso->delete();
+
+        return response()->json([
+            "message" => 200
+        ]);
     }
 }
