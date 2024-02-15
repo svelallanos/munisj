@@ -26,7 +26,9 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::group([
     'middleware' => 'api'
-], function () {
-    Route::controller(PermisoController::class);
-    Route::resource('permiso', 'permiso');
+], function ($router) {
+    Route::resource('permiso', PermisoController::class)->only([
+        "index", "show","store", "destroy"
+    ]);
+    Route::post('permiso/{id}', [PermisoController::class, 'update']);
 });
