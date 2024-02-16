@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RoleComponent } from './role.component';
 import { RoleListComponent } from './components/role-list/role-list.component';
-import { RoleAddComponent } from './components/role-add/role-add.component';
-import { RoleEditComponent } from './components/role-edit/role-edit.component';
 
 const routes: Routes = [{
   path: '',
@@ -13,10 +11,6 @@ const routes: Routes = [{
       path: 'list',
       component: RoleListComponent,
     },
-    {
-      path: 'edit',
-      component: RoleEditComponent
-    }
   ]
 }];
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Role\RoleCollection;
+use App\Http\Resources\Role\RoleResource;
 use App\Models\Role\Role;
 use Illuminate\Http\Request;
 
@@ -34,7 +35,11 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $role = Role::create($request->all());
+
+        return response()->json([
+            "role" => RoleResource::make($role),
+        ]);
     }
 
     /**
@@ -58,7 +63,11 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $role = Role::findOrFail($id);
+        $role->update($request->all());
+        return response()->json([
+            "role" => RoleResource::make($role),
+        ]);
     }
 
     /**
@@ -66,6 +75,10 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $role = Role::findOrFail($id);
+        $role->delete();
+        return response()->json([
+            "message" => 200,
+        ]);
     }
 }

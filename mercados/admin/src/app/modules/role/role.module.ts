@@ -10,25 +10,26 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { InlineSVGModule } from 'ng-inline-svg-2';
+import { SharedModule } from "../../_metronic/shared/shared.module";
 
 
 @NgModule({
-  declarations: [
-    RoleComponent,
-    RoleAddComponent,
-    RoleListComponent,
-    RoleEditComponent
-  ],
-  imports: [
-    CommonModule,
-    RoleRoutingModule,
-
-    HttpClientModule,
-    FormsModule,
-    NgbModule,
-    ReactiveFormsModule,
-    InlineSVGModule,
-    NgbModalModule,
-  ]
+    declarations: [
+        RoleComponent,
+        RoleAddComponent,
+        RoleListComponent,
+        RoleEditComponent
+    ],
+    imports: [
+        CommonModule,
+        RoleRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        NgbModule,
+        ReactiveFormsModule,
+        InlineSVGModule,
+        NgbModalModule,
+        SharedModule
+    ]
 })
 export class RoleModule { }

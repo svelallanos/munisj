@@ -46,8 +46,18 @@
                 <!--end::Card body-->
                 <!--begin::Card footer-->
                 <div class="card-footer flex-wrap pt-0">
-                    <a href="../../demo1/dist/apps/user-management/roles/view.html" class="btn btn-light btn-active-primary my-1 me-2">Ver Rol</a>
-                    <button type="button" class="btn btn-light btn-active-light-primary my-1" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">Editar Rol</button>
+                    <div class="d-flex gap-2 justify-content-between">
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-light btn-active-light-primary my-1" (click)="openModalEditRole(ROLE)">Ver Rol</button>
+                            <button type="button" class="btn btn-light btn-active-light-primary my-1" (click)="openModalEditRole(ROLE)">Editar Rol</button>
+                        </div>
+                        <button class="btn btn-white p-0"><i class="ki-duotone ki-trash text-danger fs-2tx" (click)="deleteRole(ROLE)">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                            <span class="path3"></span>
+                            <span class="path4"></span>
+                        </i></button>
+                    </div>
                 </div>
                 <!--end::Card footer-->
             </div>
