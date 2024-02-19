@@ -2,17 +2,20 @@
 
 namespace App\Models\Role;
 
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Role extends Model
+class DetRolePermiso extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        "name",
-        "state"
+        "role_id",
+        "permiso_id",
+        "view",
+        "write",
+        "create",
     ];
 
     public function setCreatedAtAttribute($value)
@@ -27,23 +30,8 @@ class Role extends Model
         $this->attributes["updated_at"] = Carbon::now();
     }
 
-    public function detalleRolPermisos()
+    public function permiso()
     {
-        return $this->hasMany(DetRolePermiso::class, 'role_id');
+        return $this->belongsTo(Permiso::class);
     }
-
-    public function usuarios()
-    {
-        return $this->hasMany(User::class, 'role_id');
-    }
-
-    // public function Role()
-    // {
-    //     return $this->hasMany(Role::class);
-    // }
-
-    // public function father()
-    // {
-    //     return $this->belongsTo(Role::class, "role_id");
-    // }
 }

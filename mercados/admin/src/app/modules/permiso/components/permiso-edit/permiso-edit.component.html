@@ -38,27 +38,11 @@
           <div
             class="form-check form-switch form-check-custom form-check-solid me-10"
           >
-            <input
-              [(ngModel)]="state"
-              name="state"
-              (click)="changeState(newState)"
-              class="form-check-input h-30px w-50px cursor-pointer"
-              name="org_read"
-              type="checkbox"
-              value=""
-              id="org_read"
-              checked="checked"
-            />
-            <label
-              *ngIf="newState == 1"
-              class="form-check-label text-success"
-              for="org_read"
+            <input [checked]="newState == 1" (click)="changeState(newState)" class="form-check-input" type="checkbox" value="" />
+            <label *ngIf="newState == 1" class="form-check-label text-success"
               >Habilitado</label
             >
-            <label
-              *ngIf="newState == 2"
-              class="form-check-label text-danger"
-              for="org_read"
+            <label *ngIf="newState == 2" class="form-check-label text-danger"
               >Desabilitado</label
             >
           </div>

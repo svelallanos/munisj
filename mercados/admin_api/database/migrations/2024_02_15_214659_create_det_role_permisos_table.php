@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('det_roles_permisos', function (Blueprint $table) {
+        Schema::create('det_role_permisos', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description');
-            $table->unsignedTinyInteger('state')->default(1);
+            $table->unsignedInteger("role_id");
+            $table->unsignedInteger("permiso_id");
+            $table->unsignedTinyInteger("view")->default(2);
+            $table->unsignedTinyInteger("write")->default(2);
+            $table->unsignedTinyInteger("create")->default(2);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('det_roles_permisos');
+        Schema::dropIfExists('det_role_permisos');
     }
 };

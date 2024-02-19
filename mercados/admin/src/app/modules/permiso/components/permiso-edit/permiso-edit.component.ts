@@ -36,8 +36,6 @@ export class PermisoEditComponent implements OnInit{
     this.state = this.permiso.state;
 
     this.newState = this.permiso.state;
-
-    console.log(this.permiso);
   }
 
   changeState(state:any)
