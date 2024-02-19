@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use App\Models\Role\Role;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -58,5 +60,22 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function setCreatedAtAttribute($value)
+    {
+        date_default_timezone_set("America/Lima");
+        $this->attributes["created_at"] = Carbon::now();
+    }
+
+    public function setUpdatedAtAttribute($value)
+    {
+        date_default_timezone_set("America/Lima");
+        $this->attributes["updated_at"] = Carbon::now();
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, "role_id");
     }
 }

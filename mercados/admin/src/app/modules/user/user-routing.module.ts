@@ -4,7 +4,6 @@ import { UserComponent } from './user.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 
 import { UserEditComponent } from './components/user-edit/user-edit.component';
-import { UserAddComponent } from './components/user-add/user-add.component';
 
 const routes: Routes = [
   {
@@ -18,11 +17,7 @@ const routes: Routes = [
       {
         path: 'edit',
         component: UserEditComponent,
-      },
-      {
-        path: 'add',
-        component:UserAddComponent,
-      },
+      }
     ],
   },
 ];
