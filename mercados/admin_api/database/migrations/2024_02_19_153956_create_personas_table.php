@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedInteger("user_id");
             $table->string('name')->nullable();
             $table->string('lastname')->nullable();
+            $table->string('avatar')->nullable();
             $table->string('dni',8)->nullable();
             $table->text('razon_social')->nullable();
             $table->string('ruc',11)->nullable();
