@@ -14,6 +14,7 @@ export class RoleListComponent implements OnInit{
 
   ROLES: any = [];
   isLoading:any;
+
   constructor(
     public roleService : RoleService, 
     public modalService: NgbModal,
