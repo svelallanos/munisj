@@ -1,3 +1,9 @@
+<span *ngIf="isLoading | async" class="indicator-progress">
+    Please wait...
+    <span
+      class="spinner-border spinner-border-sm align-middle ms-2"
+    ></span
+  ></span>
 <div class="modal-content">
     <div class="modal-header" id="kt_modal_add_user_header">
         <h2 class="fw-bolder">Agregar Usuario</h2>
@@ -10,10 +16,10 @@
             </span>
         </div>
     </div>
-    <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-        <form id="kt_modal_add_user_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="#">
+    <div class="modal-body scroll-y mx-2 mx-xl-2 my-2">
+        <form id="form_register_user" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="#">
             <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px" style="max-height: 395px;">
-                <div class="fv-row mb-7">
+                <div class="fv-row mb-7 text-center">
                     <label class="d-block fw-bold fs-6 mb-5">Foto de perfil</label>
                     <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/avatars/blank.svg')">
                         <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/media/avatars/300-6.jpg);"></div>
@@ -29,46 +35,40 @@
                             <i class="bi bi-x fs-2"></i>
                         </span>
                     </div>
-                    <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                    <div class="form-text">Tipos de archivos permitidos: png, jpg, jpeg.</div>
                 </div>
                 <div class="fv-row mb-7 fv-plugins-icon-container">
                     <label class="required fw-bold fs-6 mb-2">Nombre de usuario</label>
-                    <input type="text" name="user_name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Full name user">
+                    <input type="text" name="name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Full name user">
                 <div class="fv-plugins-message-container invalid-feedback"></div></div>
                 <div class="fv-row mb-7 fv-plugins-icon-container">
                     <label class="required fw-bold fs-6 mb-2">Email</label>
-                    <input type="email" name="user_email" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com">
+                    <input type="email" name="email" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com">
+                <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                <div class="fv-row mb-7 fv-plugins-icon-container">
+                    <label class="required fw-bold fs-6 mb-2">Password</label>
+                    <input type="text" name="password" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="**********">
                 <div class="fv-plugins-message-container invalid-feedback"></div></div>
                 <div class="mb-7">
                     <label class="required fw-bold fs-6 mb-5">Rol</label>
-                    <div class="d-flex fv-row">
-                        <div class="form-check form-check-custom form-check-solid">
-                            <input class="form-check-input me-3" name="user_role" type="radio" value="0" id="kt_modal_update_role_option_0" checked="checked">
-                            <label class="form-check-label" for="kt_modal_update_role_option_0">
-                                <div class="fw-bolder text-gray-800">Invitado</div>
-                                <div class="text-gray-600">Best for business owners and company administrators</div>
-                            </label>
+                    <ng-container *ngFor="let ROLE of ROLES">
+                        <div class="d-flex fv-row">
+                            <div class="form-check form-check-custom form-check-solid">
+                                <input class="form-check-input me-3" name="role_id" type="radio" value="{{ROLE.id}}" id="role_{{ROLE.id}}">
+                                <label class="form-check-label" for="role_{{ROLE.id}}">
+                                    <div class="fw-bolder text-gray-800">{{ ROLE.name }}</div>
+                                    <div class="text-gray-600">Best for business owners and company administrators</div>
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="separator separator-dashed my-5"></div>
-                    <div class="d-flex fv-row">
-                        <div class="form-check form-check-custom form-check-solid">
-                            <input class="form-check-input me-3" name="user_role" type="radio" value="0">
-                            <label class="form-check-label">
-                                <div class="fw-bolder text-gray-800">Administrator</div>
-                                <div class="text-gray-600">Best for business owners and company administrators</div>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="separator separator-dashed my-5"></div>
+                        <div class="separator separator-dashed my-5"></div>
+                    </ng-container>
                 </div>
             </div>
             <div class="text-center pt-15">
                 <button type="reset" class="btn btn-light me-3" (click)="modal.close()">Cerrar</button>
-                <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+                <button type="submit" class="btn btn-primary">
                     <span class="indicator-label">Submit</span>
-                    <span class="indicator-progress">Please wait...
-                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                 </button>
             </div>
         <div></div></form>

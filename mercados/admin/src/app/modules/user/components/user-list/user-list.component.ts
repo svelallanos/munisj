@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserAddComponent } from '../user-add/user-add.component';
+import { RoleService } from 'src/app/modules/role/services/role.service';
 
 @Component({
   selector: 'app-user-list',
@@ -12,10 +13,11 @@ export class UserListComponent implements OnInit{
   
   isLoading:any;
   USUARIOS:any = [];
+  ROLES:any = [];
 
   constructor(
     public userService: UserService,
-    public modalService: NgbModal
+    public modalService: NgbModal,
   ){
   }
 
@@ -35,5 +37,9 @@ export class UserListComponent implements OnInit{
   openModalCreateUser()
   {
     let modalRef = this.modalService.open(UserAddComponent, {centered: true, size: 'md'});
+    
+    modalRef.componentInstance.UserA.subscribe((User:any) => {
+      this.USUARIOS.unshift(User);
+    });
   }
 }
