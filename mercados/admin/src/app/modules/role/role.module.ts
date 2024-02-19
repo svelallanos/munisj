@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { InlineSVGModule } from 'ng-inline-svg-2';
 import { SharedModule } from "../../_metronic/shared/shared.module";
+import { RoleViewComponent } from './components/role-view/role-view.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { SharedModule } from "../../_metronic/shared/shared.module";
         RoleComponent,
         RoleAddComponent,
         RoleListComponent,
-        RoleEditComponent
+        RoleEditComponent,
+        RoleViewComponent
     ],
     imports: [
         CommonModule,

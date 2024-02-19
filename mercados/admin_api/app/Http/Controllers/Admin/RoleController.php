@@ -77,10 +77,6 @@ class RoleController extends Controller
         $newArr = [];
         $valExis = 'dsds';
 
-        return response()->json([
-            "role" => $auxArr,
-        ]);
-
         foreach ($auxArr as $key => $value) {
             $array = explode('_', $value);
             if ($valExis !== $array[0]) {

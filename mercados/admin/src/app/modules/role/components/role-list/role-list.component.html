@@ -47,7 +47,9 @@
               <button
                 type="button"
                 class="btn btn-light btn-active-light-primary my-1"
-                (click)="openModalEditRole(ROLE)"
+                
+                [routerLink]="['/roles/view']"
+                [state]="{rol: ROLE}"
               >
                 Ver Rol
               </button>
