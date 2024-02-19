@@ -3,8 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\Admin\PermisoController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\PermisoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,4 +38,9 @@ Route::group([
         "index", "show","store", "destroy"
     ]);
     Route::post('role/{id}', [RoleController::class, 'update']);
+
+    Route::resource('user', UserController::class)->only([
+        "index", "show","store", "destroy"
+    ]);
+    Route::post('user/{id}', [UserController::class, 'update']);
 });
