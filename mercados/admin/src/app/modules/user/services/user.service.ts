@@ -20,6 +20,19 @@ export class UserService {
     this.isLoading$ = this.isLoadingSubject.asObservable();
   }
 
+  showUser(user_id:string)
+  {
+    let headers = new HttpHeaders({
+      Authorization: 'Bearer ' + this.authService.token,
+    });
+    
+    let URL = URL_SERVICIOS + '/user/'+user_id;
+    this.isLoadingSubject.next(true);
+    return this.http.get(URL, {headers:headers}).pipe(
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+
   listUser()
   {
     let headers = new HttpHeaders({
@@ -31,6 +44,18 @@ export class UserService {
     return this.http.get(URL, {headers:headers}).pipe(
       finalize(() => this.isLoadingSubject.next(false))
     );
+  }
 
+  registerUser(data: FormData)
+  {
+    let headers = new HttpHeaders({
+      Authorization: 'Bearer ' + this.authService.token,
+    });
+    
+    let URL = URL_SERVICIOS + '/user';
+    this.isLoadingSubject.next(true);
+    return this.http.post(URL, data, {headers:headers}).pipe(
+      finalize(() => this.isLoadingSubject.next(false))
+    );
   }
 }
