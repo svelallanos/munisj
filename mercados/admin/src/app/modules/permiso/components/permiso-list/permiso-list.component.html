@@ -58,8 +58,8 @@
                   >
                 </td>
                 <td>20 Dec 2022, 11:30 am</td>
-                <td *ngIf="PERMISO.state == 1"><span class="badge badge-primary">Activo</span></td>
-                <td *ngIf="PERMISO.state == 2"><span class="badge badge-danger">Des-activo</span></td>
+                <td *ngIf="PERMISO.state === 1"><span class="badge badge-primary">Activo</span></td>
+                <td *ngIf="PERMISO.state === 2"><span class="badge badge-danger">Des-activo</span></td>
                 <td class="text-end">
                   <button
                     class="btn btn-icon btn-active-light-primary w-30px h-30px me-3"

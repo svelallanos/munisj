@@ -24,7 +24,7 @@
               <div *ngIf="i < 5" class="d-flex align-items-center py-2">
                 <span
                   class="bullet bg-{{
-                    PERMISO.state == 1 ? 'primary' : 'danger'
+                    PERMISO.state === 1 ? 'primary' : 'danger'
                   }} me-3"
                 ></span
                 >{{ PERMISO.name }}
