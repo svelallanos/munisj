@@ -17,6 +17,7 @@ class RoleResource extends JsonResource
         return [
             "id" => $this->resource->id,
             "name" => $this->resource->name,
+            "description" => $this->resource->description,
             "state" => $this->resource->state ?? 1,
             "permisos" => $this->detalleRolPermisos->map(function ($item) {
                 return [
@@ -28,7 +29,7 @@ class RoleResource extends JsonResource
                     "state" => $item->permiso->state,
                 ];
             }),
-            "usuarios" => $this->usuarios->map(function($user) {
+            "usuarios" => $this->usuarios->map(function ($user) {
                 return [
                     "dni" => 12345678,
                     "name" => $user->name,

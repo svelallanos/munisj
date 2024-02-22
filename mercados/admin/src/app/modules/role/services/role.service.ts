@@ -31,7 +31,7 @@ export class RoleService {
     );
   }
 
-  registerRoles(data: any){
+  registerRoles(data: FormData){
     this.isLoadingSubject.next(true);
     let headers = new HttpHeaders({"Authorization": "Bearer "+this.authService.token});
 
@@ -49,6 +49,16 @@ export class RoleService {
     return this.http.post(URL, data, {headers: headers}).pipe(
       finalize(() => this.isLoadingSubject.next(false))
     );
+  }
+
+  changeStateRole(id_rol: string, data:any){
+    let headers = new HttpHeaders({"Authorization": "Bearer " +this.authService.token});
+
+    this.isLoadingSubject.next(true);
+    let URL = URL_SERVICIOS+'/role/'+id_rol+'/update-status';
+    return this.http.put(URL, {data}, {headers: headers}).pipe(
+      finalize(() => this.isLoadingSubject.next(false))
+    ); 
   }
 
   deleteRole(role_id: any ){

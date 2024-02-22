@@ -39,6 +39,8 @@ Route::group([
     ]);
     Route::post('role/{id}', [RoleController::class, 'update']);
 
+    Route::put('role/{id}/update-status', [RoleController::class, 'updateStatus']);
+
     Route::resource('user', UserController::class)->only([
         "index", "show","store", "destroy"
     ]);

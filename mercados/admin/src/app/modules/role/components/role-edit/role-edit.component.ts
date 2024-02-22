@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { RoleService } from '../../services/role.service';
 import Swal from 'sweetalert2';
 import { PermisoService } from 'src/app/modules/permiso/services/permiso.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-role-edit',
@@ -14,6 +15,7 @@ export class RoleEditComponent implements OnInit {
   @Output() RoleE: EventEmitter<any> = new EventEmitter();
 
   name: string;
+  description: string;
   isLoading: any;
 
   PERMISOS: any = [];
@@ -21,11 +23,13 @@ export class RoleEditComponent implements OnInit {
 
   search: any;
   state: any;
+  newState: any;
 
   constructor(
     public modal: NgbActiveModal,
     public roleService: RoleService,
-    public permisoService: PermisoService
+    public permisoService: PermisoService,
+    public toaster: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +39,9 @@ export class RoleEditComponent implements OnInit {
   }
 
   cargarDatos() {
+    this.newState = this.role.state;
     this.name = this.role.name;
+    this.description = this.role.description;
     this.PERMISOS = this.role.permisos;
     this.permisosAll();
   }
@@ -83,6 +89,47 @@ export class RoleEditComponent implements OnInit {
           this.modal.close();
           Swal.fire('Exito', 'Rol actualizado correctamente', 'success');
         });
+    });
+  }
+
+  changeState(state: any) {
+    let auxState = state;
+    let nameState = 'habilitar';
+
+    auxState = state == 1 ? 2 : 1;
+    this.newState = auxState;
+    if (state == 1) {
+      nameState = 'desabilitar';
+    }
+
+    Swal.fire({
+      title:
+        '¿Estás seguro de ' +
+        nameState +
+        ' el registro: # ' +
+        this.role.id +
+        '? ',
+      html: '<h2>' + this.role.name + '</h2>',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.roleService
+          .changeStateRole(this.role.id, { state: auxState })
+          .subscribe((resp: any) => {
+            console.log(resp);
+            this.newState = auxState;
+            this.RoleE.emit(resp.role);
+            this.modal.close();
+            this.toaster.success('Rol actualizado satisfactoriamente','Exito');
+          });
+      } else {
+        this.newState = state;
+      }
     });
   }
 }

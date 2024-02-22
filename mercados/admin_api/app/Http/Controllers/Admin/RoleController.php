@@ -36,7 +36,45 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $role = Role::create($request->all());
+        $role = Role::create([
+            "name" => $request->name,
+            "description" => $request->description,
+        ]);
+
+        $auxArr = $request->all();
+        unset($auxArr['name'], $auxArr['description']);
+
+        $newArr = [];
+        $valExis = 'dsds';
+
+        foreach ($auxArr as $key => $value) {
+            $array = explode('_', $value);
+
+            if ($valExis !== $array[0]) {
+                $valExis = $array[0];
+            }
+
+            $position = 0;
+            if ($array[1] == 2) {
+                $position = 1;
+            }
+            if ($array[1] == 3) {
+                $position = 2;
+            }
+
+            $newArr[$array[0]][$position] = $array[1];
+        }
+
+        // Asignamos los nuevos roles con sus permisos
+        foreach ($newArr as $key => $value) {
+            $assingRolePermisos = DetRolePermiso::create([
+                "role_id" => $role->id,
+                "permiso_id" => $key,
+                "view" => isset($value[0]) ? 1 : 2,
+                "write" => isset($value[1]) ? 1 : 2,
+                "create" => isset($value[2]) ? 1 : 2,
+            ]);
+        }
 
         return response()->json([
             "role" => RoleResource::make($role),
@@ -67,12 +105,13 @@ class RoleController extends Controller
         $role = Role::findOrFail($id);
         $role->detalleRolPermisos()->delete();
 
-        $role->update([
-            "name" => $request->name
+        $role -> update([
+            "name" => $request->name,
+            "description" => $request->description,
         ]);
 
         $auxArr = $request->all();
-        unset($auxArr['name']);
+        unset($auxArr['name'], $auxArr['description']);
 
         $newArr = [];
         $valExis = 'dsds';
@@ -82,14 +121,12 @@ class RoleController extends Controller
             if ($valExis !== $array[0]) {
                 $valExis = $array[0];
             }
- 
+
             $position = 0;
-            if($array[1] == 2)
-            {
+            if ($array[1] == 2) {
                 $position = 1;
             }
-            if($array[1] == 3)
-            {
+            if ($array[1] == 3) {
                 $position = 2;
             }
 
@@ -112,6 +149,17 @@ class RoleController extends Controller
         ]);
     }
 
+    public function updateStatus(Request $request, $id){
+        $role = Role::findOrFail($id);
+
+        $role -> update([
+            "state" => $request->data['state'],
+        ]);
+
+        return response()->json([
+            "role" => RoleResource::make($role),
+        ]);
+    }
     /**
      * Remove the specified resource from storage.
      */

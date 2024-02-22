@@ -27,6 +27,11 @@ export class RoleListComponent implements OnInit{
 
   openModalCreateRole(){
     const modalRef = this.modalService.open(RoleAddComponent,{centered: true, size: 'lg'});
+
+    modalRef.componentInstance.RoleA.subscribe((Role:any) => {
+      console.log(Role);
+      this.ROLES.unshift(Role);
+    });
   }
 
   openModalEditRole(ROLE:any){

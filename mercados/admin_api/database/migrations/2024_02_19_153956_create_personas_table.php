@@ -26,7 +26,6 @@ return new class extends Migration
             $table->string('direccion');
             $table->unsignedTinyInteger('state')->default(1);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
