@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UserAddComponent } from '../user-add/user-add.component';
-import { RoleService } from 'src/app/modules/role/services/role.service';
+import { UserAddComponent } from '../../containers/user-add/user-add.component';
 
 @Component({
   selector: 'app-user-list',

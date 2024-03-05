@@ -37,40 +37,28 @@
                     </div>
                     <div class="form-text">Tipos de archivos permitidos: png, jpg, jpeg.</div>
                 </div>
-                <div class="fv-row mb-7 fv-plugins-icon-container">
-                    <label class="required fw-bold fs-6 mb-2">Nombre de usuario</label>
-                    <input type="text" name="name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Full name user">
-                <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                <div class="fv-row mb-7 fv-plugins-icon-container">
-                    <label class="required fw-bold fs-6 mb-2">Email</label>
-                    <input type="email" name="email" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com">
-                <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                <div class="fv-row mb-7 fv-plugins-icon-container">
-                    <label class="required fw-bold fs-6 mb-2">Password</label>
-                    <input type="text" name="password" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="**********">
-                <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                <app-user-input [inputLabel]="'User Name'" [inputType]="'text'" [inputName]="'name'" [inputPlaceholder]="'Enter user name'"></app-user-input>
+                <app-user-input [inputLabel]="'Email'" [inputType]="'email'" [inputName]="'email'" [inputPlaceholder]="'example@domain.com'"></app-user-input>
+                <app-user-input [inputLabel]="'Password'" [inputType]="'text'" [inputName]="'password'" [inputPlaceholder]="'**********'"></app-user-input>
                 <div class="mb-7">
                     <label class="required fw-bold fs-6 mb-5">Rol</label>
                     <ng-container *ngFor="let ROLE of ROLES">
-                        <div class="d-flex fv-row">
-                            <div class="form-check form-check-custom form-check-solid">
-                                <input class="form-check-input me-3" name="role_id" type="radio" value="{{ROLE.id}}" id="role_{{ROLE.id}}">
-                                <label class="form-check-label" for="role_{{ROLE.id}}">
-                                    <div class="fw-bolder text-gray-800">{{ ROLE.name }}</div>
-                                    <div class="text-gray-600">Best for business owners and company administrators</div>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="separator separator-dashed my-5"></div>
+                        <app-user-check 
+                        [checkName]="'role_id'" 
+                        [checkType]="'radio'" 
+                        [checkValue]="ROLE.id" 
+                        [checkId]="ROLE.id" 
+                        [checkFor]="'role_'+ROLE.id" 
+                        [checkName]="ROLE.name" 
+                        [checkDecription]="'Best for business owners and company administrators'"
+                        ></app-user-check>
                     </ng-container>
                 </div>
             </div>
             <div class="text-center pt-15">
-                <button type="reset" class="btn btn-light me-3" (click)="modal.close()">Cerrar</button>
-                <button type="submit" class="btn btn-primary">
-                    <span class="indicator-label">Submit</span>
-                </button>
+                <app-user-button [addClass]="'light me-3'" [label]="'Cerrar'" (click)="modal.close()"></app-user-button>
+                <app-user-button [addClass]="'primary'" [label]="'Guardar'"></app-user-button>
             </div>
-        <div></div></form>
+        </form>
     </div>
 </div>

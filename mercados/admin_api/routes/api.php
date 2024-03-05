@@ -43,6 +43,6 @@ Route::group([
 
     Route::resource('user', UserController::class)->only([
         "index", "show","store", "destroy"
-    ]);
-    Route::post('user/{id}', [UserController::class, 'update']);
+    ])->names('admin.user');
+    Route::post('user/{id}', [UserController::class, 'update'])->name('admin.user.edit');
 });

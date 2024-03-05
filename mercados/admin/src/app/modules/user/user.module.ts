@@ -7,10 +7,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { InlineSVGModule } from 'ng-inline-svg-2';
 import { UserComponent } from './user.component';
-import { UserListComponent } from './components/user-list/user-list.component';
-import { UserAddComponent } from './components/user-add/user-add.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { UserDeleteComponent } from './components/user-delete/user-delete.component';
+import { UserAddComponent } from './containers/user-add/user-add.component';
+import { UserListComponent } from './containers/user-list/user-list.component';
+import { UserInputComponent } from './components/user-input/user-input.component';
+import { UserTableComponent } from './components/user-table/user-table.component';
+import { UserButtonComponent } from './components/user-button/user-button.component';
+import { UserCheckComponent } from './components/user-check/user-check.component';
 
 
 @NgModule({
@@ -20,6 +24,10 @@ import { UserDeleteComponent } from './components/user-delete/user-delete.compon
     UserAddComponent,
     UserEditComponent,
     UserDeleteComponent,
+    UserInputComponent,
+    UserTableComponent,
+    UserButtonComponent,
+    UserCheckComponent,
     
   ],
   imports: [

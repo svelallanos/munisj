@@ -12,9 +12,11 @@ use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use Spatie\Permission\Traits\HasRoles;
+
 class User extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -75,13 +77,13 @@ class User extends Authenticatable implements JWTSubject
         $this->attributes["updated_at"] = Carbon::now();
     }
 
-    public function role()
-    {
-        return $this->belongsTo(Role::class, "role_id");
-    }
+    // public function role()
+    // {
+    //     return $this->belongsTo(Role::class, "role_id");
+    // }
 
-    public function persona()
-    {
-        return $this->hasOne(Persona::class, "user_id");
-    }
+    // public function persona()
+    // {
+    //     return $this->hasOne(Persona::class, "user_id");
+    // }
 }

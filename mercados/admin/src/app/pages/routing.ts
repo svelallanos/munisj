@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { hasRoleGuard } from '../core/guards/has-role.guard';
 
 const Routing: Routes = [
   {
@@ -51,6 +52,10 @@ const Routing: Routes = [
 
   {
     path: 'users',
+    canActivate: [hasRoleGuard],
+    data: {
+      allowedRoles: ['Admin']
+    },
     loadChildren: () => import('../modules/user/user.module').then((m) => m.UserModule),
   },
   {

@@ -18,6 +18,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { CKEditorModule } from 'ckeditor4-angular';
 // #fake-end#
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { NumberOnlyDirective } from './core/directives/number-only.directive';
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -29,7 +30,7 @@ function appInitializer(authService: AuthService) {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, NumberOnlyDirective],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -63,5 +64,8 @@ function appInitializer(authService: AuthService) {
     },
   ],
   bootstrap: [AppComponent],
+  exports: [
+    
+  ],
 })
 export class AppModule { }
